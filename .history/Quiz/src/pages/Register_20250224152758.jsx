@@ -27,7 +27,7 @@ function Register() {
 
   const fetchStats = async () => {
     try {
-      const response = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/stats');
+      const response = await fetch('http://localhost:3000/api/stats');
       const data = await response.json();
       if (data.status === 'ok') {
         setStats({

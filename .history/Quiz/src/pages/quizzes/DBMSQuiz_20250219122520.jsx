@@ -3,82 +3,71 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import QuizTemplate from '../../components/QuizTemplate';
 
-function NextJSQuiz() {
+function DBMSQuiz() {
   const navigate = useNavigate();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showScore, setShowScore] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [timeLeft, setTimeLeft] = useState(30);
-  const [questions, setQuestions] = useState( [
+  const [questions, setQuestions] = useState([
     {
-      questionText: 'What is Next.js?',
+      questionText: 'What is ACID in database transactions?',
       options: [
-        'A CSS framework',
-        'A React framework for production',
-        'A database system',
-        'A testing library'
-
+        'Atomicity, Consistency, Isolation, Durability',
+        'Availability, Consistency, Integration, Distribution',
+        'Authentication, Compression, Isolation, Detection',
+        'Access, Control, Integration, Distribution'
       ],
-      correctOption: 'A React framework for production'
+      correctOption: 'Atomicity, Consistency, Isolation, Durability'
+    },
+    {
+      questionText: 'Which normal form deals with transitive dependencies?',
+      options: ['1NF', '2NF', '3NF', 'BCNF'],
+      correctOption: '3NF'
     },
 
     {
-      questionText: 'What is Server-Side Rendering (SSR)?',
+      questionText: 'What is a primary key?',
       options: [
-        'Client-side data fetching',
-        'Rendering pages on the server before sending to client',
-        'Browser caching',
-        'API routing'
-
+        'A key that can be null',
+        'A unique identifier for a record in a table',
+        'A foreign key reference',
+        'A composite key only'
       ],
-      correctOption: 'Rendering pages on the server before sending to client'
-    },
-
-      {
-      questionText: 'What is the purpose of getStaticProps?',
-      options: [
-        'To handle client-side events',
-        'To fetch data at build time',
-
-        'To manage state',
-        'To handle routing'
-      ],
-      correctOption: 'To fetch data at build time'
+      correctOption: 'A unique identifier for a record in a table'
     },
 
     {
-      questionText: 'What is the file-based routing in Next.js?',
+      questionText: 'What is the purpose of an index in a database?',
       options: [
-        'Manual route configuration',
-        'Automatic routing based on file structure',
-        'Database-driven routing',
-        'API-based routing'
-
+        'To store backup data',
+        'To speed up data retrieval operations',
+        'To encrypt sensitive data',
+        'To compress data storage'
       ],
-      correctOption: 'Automatic routing based on file structure'
+      correctOption: 'To speed up data retrieval operations'
     },
 
     {
-      questionText: 'What is the purpose of _app.js in Next.js?',
+      questionText: 'What is a foreign key?',
       options: [
-        'To initialize database',
-        'To initialize page components and layouts',
-        'To handle API calls',
-        'To manage state'
-
+        'A primary key in a different table',
+        'A key that references a primary key in another table',
+        'A composite key',
+        'A candidate key'
       ],
-      correctOption: 'To initialize page components and layouts'
+      correctOption: 'A key that references a primary key in another table'
     }
-  ] );
+  ]);
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch(`https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/quizzes/5`);
+        const response = await fetch(`http://localhost:3000/api/quizzes/2`);
         const data = await response.json();
         if(data.status === 'error') {
-          const quizzes = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/quizzes/init');
+          const quizzes = await fetch('http://localhost:3000/api/quizzes/init');
           const data2 = await quizzes.json();
           const formattedQuestions = data2.questions.map(q => ({
             questionText: q.text, 
@@ -97,67 +86,56 @@ function NextJSQuiz() {
           console.log('Formatted questions:', formattedQuestions);
         }
       } catch (error) {
-        setQuestions( [
+        setQuestions([
           {
-            questionText: 'What is Next.js?',
+            questionText: 'What is ACID in database transactions?',
             options: [
-              'A CSS framework',
-              'A React framework for production',
-              'A database system',
-              'A testing library'
-      
+              'Atomicity, Consistency, Isolation, Durability',
+              'Availability, Consistency, Integration, Distribution',
+              'Authentication, Compression, Isolation, Detection',
+              'Access, Control, Integration, Distribution'
             ],
-            correctOption: 'A React framework for production'
+            correctOption: 'Atomicity, Consistency, Isolation, Durability'
+          },
+          {
+            questionText: 'Which normal form deals with transitive dependencies?',
+            options: ['1NF', '2NF', '3NF', 'BCNF'],
+            correctOption: '3NF'
           },
       
           {
-            questionText: 'What is Server-Side Rendering (SSR)?',
+            questionText: 'What is a primary key?',
             options: [
-              'Client-side data fetching',
-              'Rendering pages on the server before sending to client',
-              'Browser caching',
-              'API routing'
-      
+              'A key that can be null',
+              'A unique identifier for a record in a table',
+              'A foreign key reference',
+              'A composite key only'
             ],
-            correctOption: 'Rendering pages on the server before sending to client'
-          },
-      
-            {
-            questionText: 'What is the purpose of getStaticProps?',
-            options: [
-              'To handle client-side events',
-              'To fetch data at build time',
-      
-              'To manage state',
-              'To handle routing'
-            ],
-            correctOption: 'To fetch data at build time'
+            correctOption: 'A unique identifier for a record in a table'
           },
       
           {
-            questionText: 'What is the file-based routing in Next.js?',
+            questionText: 'What is the purpose of an index in a database?',
             options: [
-              'Manual route configuration',
-              'Automatic routing based on file structure',
-              'Database-driven routing',
-              'API-based routing'
-      
+              'To store backup data',
+              'To speed up data retrieval operations',
+              'To encrypt sensitive data',
+              'To compress data storage'
             ],
-            correctOption: 'Automatic routing based on file structure'
+            correctOption: 'To speed up data retrieval operations'
           },
       
           {
-            questionText: 'What is the purpose of _app.js in Next.js?',
+            questionText: 'What is a foreign key?',
             options: [
-              'To initialize database',
-              'To initialize page components and layouts',
-              'To handle API calls',
-              'To manage state'
-      
+              'A primary key in a different table',
+              'A key that references a primary key in another table',
+              'A composite key',
+              'A candidate key'
             ],
-            correctOption: 'To initialize page components and layouts'
+            correctOption: 'A key that references a primary key in another table'
           }
-        ] );
+        ]);
         console.error('Error fetching questions:', error);
       }
     };
@@ -252,7 +230,7 @@ const handleQuizCompletion = async (finalAnswers) => {
       return;
     }
 
-    const response = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/update-profile', {
+    const response = await fetch('http://localhost:3000/api/update-profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -260,7 +238,7 @@ const handleQuizCompletion = async (finalAnswers) => {
       },
       body: JSON.stringify({
         score: finalScore,
-        quizTitle: 'Next.js',
+        quizTitle: 'Database Management Systems',
         attemptDate: new Date().toISOString()
       })
     });
@@ -311,8 +289,8 @@ const handleQuizCompletion = async (finalAnswers) => {
 
   return (
     <QuizTemplate
-    title="Next.js Quiz"
-    subtitle="Test your Next.js framework knowledge"
+    title="Database Management Quiz"
+    subtitle="Test your DBMS concepts"
     questions={questions || []}
     currentQuestion={currentQuestion}
     timeLeft={timeLeft}
@@ -327,4 +305,4 @@ const handleQuizCompletion = async (finalAnswers) => {
   );
 }
 
-export default NextJSQuiz;
+export default DBMSQuiz;

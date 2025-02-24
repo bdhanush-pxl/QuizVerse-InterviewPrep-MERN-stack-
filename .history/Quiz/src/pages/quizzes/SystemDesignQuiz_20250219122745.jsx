@@ -3,82 +3,55 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import QuizTemplate from '../../components/QuizTemplate';
 
-function NextJSQuiz() {
+function SystemDesignQuiz() {
   const navigate = useNavigate();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showScore, setShowScore] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [timeLeft, setTimeLeft] = useState(30);
-  const [questions, setQuestions] = useState( [
+  const [questions, setQuestions] = useState([
     {
-      questionText: 'What is Next.js?',
+      questionText: "What is scalability in system design?",
       options: [
-        'A CSS framework',
-        'A React framework for production',
-        'A database system',
-        'A testing library'
-
+        "The ability of a system to handle increased load by adding resources",
+        "The speed at which a system processes requests",
+        "The amount of data a system can store",
+        "The number of concurrent users"
       ],
-      correctOption: 'A React framework for production'
+      correctOption: "The ability of a system to handle increased load by adding resources"
     },
 
     {
-      questionText: 'What is Server-Side Rendering (SSR)?',
+      questionText: "What is a load balancer?",
       options: [
-        'Client-side data fetching',
-        'Rendering pages on the server before sending to client',
-        'Browser caching',
-        'API routing'
-
+        "A device that stores data",
+        "A component that distributes incoming traffic across multiple servers",
+        "A backup server",
+        "A type of database"
       ],
-      correctOption: 'Rendering pages on the server before sending to client'
-    },
-
-      {
-      questionText: 'What is the purpose of getStaticProps?',
-      options: [
-        'To handle client-side events',
-        'To fetch data at build time',
-
-        'To manage state',
-        'To handle routing'
-      ],
-      correctOption: 'To fetch data at build time'
+      correctOption: "A component that distributes incoming traffic across multiple servers"
     },
 
     {
-      questionText: 'What is the file-based routing in Next.js?',
+      questionText: "What is the CAP theorem?",
       options: [
-        'Manual route configuration',
-        'Automatic routing based on file structure',
-        'Database-driven routing',
-        'API-based routing'
-
+        "A security protocol",
+        "A database query language",
+        "A theorem stating you can only have two of: Consistency, Availability, and Partition tolerance",
+        "A network routing algorithm"
       ],
-      correctOption: 'Automatic routing based on file structure'
-    },
-
-    {
-      questionText: 'What is the purpose of _app.js in Next.js?',
-      options: [
-        'To initialize database',
-        'To initialize page components and layouts',
-        'To handle API calls',
-        'To manage state'
-
-      ],
-      correctOption: 'To initialize page components and layouts'
+      correctOption: "A theorem stating you can only have two of: Consistency, Availability, and Partition tolerance"
     }
-  ] );
+  ]);
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch(`https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/quizzes/5`);
+        const response = await fetch(`http://localhost:3000/api/quizzes/3`);
         const data = await response.json();
         if(data.status === 'error') {
-          const quizzes = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/quizzes/init');
+          const quizzes = await fetch('http://localhost:3000/api/quizzes/init');
           const data2 = await quizzes.json();
           const formattedQuestions = data2.questions.map(q => ({
             questionText: q.text, 
@@ -97,67 +70,40 @@ function NextJSQuiz() {
           console.log('Formatted questions:', formattedQuestions);
         }
       } catch (error) {
-        setQuestions( [
+        setQuestions([
           {
-            questionText: 'What is Next.js?',
+            questionText: "What is scalability in system design?",
             options: [
-              'A CSS framework',
-              'A React framework for production',
-              'A database system',
-              'A testing library'
-      
+              "The ability of a system to handle increased load by adding resources",
+              "The speed at which a system processes requests",
+              "The amount of data a system can store",
+              "The number of concurrent users"
             ],
-            correctOption: 'A React framework for production'
+            correctOption: "The ability of a system to handle increased load by adding resources"
           },
       
           {
-            questionText: 'What is Server-Side Rendering (SSR)?',
+            questionText: "What is a load balancer?",
             options: [
-              'Client-side data fetching',
-              'Rendering pages on the server before sending to client',
-              'Browser caching',
-              'API routing'
-      
+              "A device that stores data",
+              "A component that distributes incoming traffic across multiple servers",
+              "A backup server",
+              "A type of database"
             ],
-            correctOption: 'Rendering pages on the server before sending to client'
-          },
-      
-            {
-            questionText: 'What is the purpose of getStaticProps?',
-            options: [
-              'To handle client-side events',
-              'To fetch data at build time',
-      
-              'To manage state',
-              'To handle routing'
-            ],
-            correctOption: 'To fetch data at build time'
+            correctOption: "A component that distributes incoming traffic across multiple servers"
           },
       
           {
-            questionText: 'What is the file-based routing in Next.js?',
+            questionText: "What is the CAP theorem?",
             options: [
-              'Manual route configuration',
-              'Automatic routing based on file structure',
-              'Database-driven routing',
-              'API-based routing'
-      
+              "A security protocol",
+              "A database query language",
+              "A theorem stating you can only have two of: Consistency, Availability, and Partition tolerance",
+              "A network routing algorithm"
             ],
-            correctOption: 'Automatic routing based on file structure'
-          },
-      
-          {
-            questionText: 'What is the purpose of _app.js in Next.js?',
-            options: [
-              'To initialize database',
-              'To initialize page components and layouts',
-              'To handle API calls',
-              'To manage state'
-      
-            ],
-            correctOption: 'To initialize page components and layouts'
+            correctOption: "A theorem stating you can only have two of: Consistency, Availability, and Partition tolerance"
           }
-        ] );
+        ]);
         console.error('Error fetching questions:', error);
       }
     };
@@ -252,7 +198,7 @@ const handleQuizCompletion = async (finalAnswers) => {
       return;
     }
 
-    const response = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/update-profile', {
+    const response = await fetch('http://localhost:3000/api/update-profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -260,7 +206,7 @@ const handleQuizCompletion = async (finalAnswers) => {
       },
       body: JSON.stringify({
         score: finalScore,
-        quizTitle: 'Next.js',
+        quizTitle: 'System Design',
         attemptDate: new Date().toISOString()
       })
     });
@@ -311,8 +257,8 @@ const handleQuizCompletion = async (finalAnswers) => {
 
   return (
     <QuizTemplate
-    title="Next.js Quiz"
-    subtitle="Test your Next.js framework knowledge"
+    title="System Design Quiz"
+    subtitle="Test your System Design knowledge"
     questions={questions || []}
     currentQuestion={currentQuestion}
     timeLeft={timeLeft}
@@ -327,4 +273,4 @@ const handleQuizCompletion = async (finalAnswers) => {
   );
 }
 
-export default NextJSQuiz;
+export default SystemDesignQuiz;

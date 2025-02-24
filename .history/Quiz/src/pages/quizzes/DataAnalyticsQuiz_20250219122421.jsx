@@ -3,82 +3,82 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import QuizTemplate from '../../components/QuizTemplate';
 
-function NextJSQuiz() {
+function DataAnalyticsQuiz() {
   const navigate = useNavigate();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showScore, setShowScore] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [timeLeft, setTimeLeft] = useState(30);
-  const [questions, setQuestions] = useState( [
+  const [questions, setQuestions] = useState(  [
     {
-      questionText: 'What is Next.js?',
+      questionText: 'What is the primary purpose of data visualization?',
       options: [
-        'A CSS framework',
-        'A React framework for production',
-        'A database system',
-        'A testing library'
+        'To make data look pretty',
+        'To help understand patterns and trends in data',
+        'To store data efficiently',
+        'To encrypt data'
 
       ],
-      correctOption: 'A React framework for production'
+      correctOption: 'To help understand patterns and trends in data'
     },
 
     {
-      questionText: 'What is Server-Side Rendering (SSR)?',
+      questionText: 'Which of these is NOT a common data visualization tool?',
       options: [
-        'Client-side data fetching',
-        'Rendering pages on the server before sending to client',
-        'Browser caching',
-        'API routing'
+        'Tableau',
+        'Power BI',
+        'MongoDB',
+        'Google Data Studio'
 
       ],
-      correctOption: 'Rendering pages on the server before sending to client'
+      correctOption: 'MongoDB'
+    },
+
+    {
+      questionText: 'What is SQL primarily used for?',
+      options: [
+        'Web design',
+        'Database querying and manipulation',
+        'Image processing',
+        'Network security'
+
+      ],
+      correctOption: 'Database querying and manipulation'
+    },
+
+    {
+      questionText: 'What is a key feature of descriptive analytics?',
+      options: [
+        'Predicting future trends',
+        'Summarizing historical data',
+        'Real-time processing',
+        'Machine learning'
+
+      ],
+      correctOption: 'Summarizing historical data'
     },
 
       {
-      questionText: 'What is the purpose of getStaticProps?',
+      questionText: 'Which chart type is best for showing data over time?',
       options: [
-        'To handle client-side events',
-        'To fetch data at build time',
+        'Pie chart',
+        'Line chart',
 
-        'To manage state',
-        'To handle routing'
+        'Bar chart',
+        'Scatter plot'
       ],
-      correctOption: 'To fetch data at build time'
-    },
-
-    {
-      questionText: 'What is the file-based routing in Next.js?',
-      options: [
-        'Manual route configuration',
-        'Automatic routing based on file structure',
-        'Database-driven routing',
-        'API-based routing'
-
-      ],
-      correctOption: 'Automatic routing based on file structure'
-    },
-
-    {
-      questionText: 'What is the purpose of _app.js in Next.js?',
-      options: [
-        'To initialize database',
-        'To initialize page components and layouts',
-        'To handle API calls',
-        'To manage state'
-
-      ],
-      correctOption: 'To initialize page components and layouts'
+      correctOption: 'Line chart'
     }
   ] );
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch(`https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/quizzes/5`);
+        const response = await fetch(`http://localhost:3000/api/quizzes/9`);
         const data = await response.json();
         if(data.status === 'error') {
-          const quizzes = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/quizzes/init');
+          const quizzes = await fetch('http://localhost:3000/api/quizzes/init');
           const data2 = await quizzes.json();
           const formattedQuestions = data2.questions.map(q => ({
             questionText: q.text, 
@@ -99,63 +99,63 @@ function NextJSQuiz() {
       } catch (error) {
         setQuestions( [
           {
-            questionText: 'What is Next.js?',
+            questionText: 'What is the primary purpose of data visualization?',
             options: [
-              'A CSS framework',
-              'A React framework for production',
-              'A database system',
-              'A testing library'
-      
+              'To make data look pretty',
+              'To help understand patterns and trends in data',
+              'To store data efficiently',
+              'To encrypt data'
+
             ],
-            correctOption: 'A React framework for production'
+            correctOption: 'To help understand patterns and trends in data'
           },
-      
+
           {
-            questionText: 'What is Server-Side Rendering (SSR)?',
+            questionText: 'Which of these is NOT a common data visualization tool?',
             options: [
-              'Client-side data fetching',
-              'Rendering pages on the server before sending to client',
-              'Browser caching',
-              'API routing'
-      
+              'Tableau',
+              'Power BI',
+              'MongoDB',
+              'Google Data Studio'
+
             ],
-            correctOption: 'Rendering pages on the server before sending to client'
+            correctOption: 'MongoDB'
           },
-      
+
+          {
+            questionText: 'What is SQL primarily used for?',
+            options: [
+              'Web design',
+              'Database querying and manipulation',
+              'Image processing',
+              'Network security'
+
+            ],
+            correctOption: 'Database querying and manipulation'
+          },
+
+          {
+            questionText: 'What is a key feature of descriptive analytics?',
+            options: [
+              'Predicting future trends',
+              'Summarizing historical data',
+              'Real-time processing',
+              'Machine learning'
+
+            ],
+            correctOption: 'Summarizing historical data'
+          },
+
             {
-            questionText: 'What is the purpose of getStaticProps?',
+            questionText: 'Which chart type is best for showing data over time?',
             options: [
-              'To handle client-side events',
-              'To fetch data at build time',
-      
-              'To manage state',
-              'To handle routing'
+              'Pie chart',
+              'Line chart',
+
+              'Bar chart',
+              'Scatter plot'
             ],
-            correctOption: 'To fetch data at build time'
-          },
-      
-          {
-            questionText: 'What is the file-based routing in Next.js?',
-            options: [
-              'Manual route configuration',
-              'Automatic routing based on file structure',
-              'Database-driven routing',
-              'API-based routing'
-      
-            ],
-            correctOption: 'Automatic routing based on file structure'
-          },
-      
-          {
-            questionText: 'What is the purpose of _app.js in Next.js?',
-            options: [
-              'To initialize database',
-              'To initialize page components and layouts',
-              'To handle API calls',
-              'To manage state'
-      
-            ],
-            correctOption: 'To initialize page components and layouts'
+            correctOption: 'Line chart'
           }
         ] );
         console.error('Error fetching questions:', error);
@@ -252,7 +252,7 @@ const handleQuizCompletion = async (finalAnswers) => {
       return;
     }
 
-    const response = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/update-profile', {
+    const response = await fetch('http://localhost:3000/api/update-profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -260,7 +260,7 @@ const handleQuizCompletion = async (finalAnswers) => {
       },
       body: JSON.stringify({
         score: finalScore,
-        quizTitle: 'Next.js',
+        quizTitle: 'Data Analytics',
         attemptDate: new Date().toISOString()
       })
     });
@@ -311,8 +311,8 @@ const handleQuizCompletion = async (finalAnswers) => {
 
   return (
     <QuizTemplate
-    title="Next.js Quiz"
-    subtitle="Test your Next.js framework knowledge"
+    title="Data Analytics Quiz"
+    subtitle="Learn data visualization, SQL, and analytics tools"
     questions={questions || []}
     currentQuestion={currentQuestion}
     timeLeft={timeLeft}
@@ -327,4 +327,4 @@ const handleQuizCompletion = async (finalAnswers) => {
   );
 }
 
-export default NextJSQuiz;
+export default DataAnalyticsQuiz;

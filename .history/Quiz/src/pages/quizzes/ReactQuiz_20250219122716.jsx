@@ -3,82 +3,72 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import QuizTemplate from '../../components/QuizTemplate';
 
-function NextJSQuiz() {
+function ReactQuiz() {
   const navigate = useNavigate();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showScore, setShowScore] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [timeLeft, setTimeLeft] = useState(30);
-  const [questions, setQuestions] = useState( [
+  const [questions, setQuestions] = useState([
     {
-      questionText: 'What is Next.js?',
-      options: [
-        'A CSS framework',
-        'A React framework for production',
-        'A database system',
-        'A testing library'
-
-      ],
-      correctOption: 'A React framework for production'
-    },
-
-    {
-      questionText: 'What is Server-Side Rendering (SSR)?',
-      options: [
-        'Client-side data fetching',
-        'Rendering pages on the server before sending to client',
-        'Browser caching',
-        'API routing'
-
-      ],
-      correctOption: 'Rendering pages on the server before sending to client'
-    },
-
-      {
-      questionText: 'What is the purpose of getStaticProps?',
-      options: [
-        'To handle client-side events',
-        'To fetch data at build time',
-
-        'To manage state',
-        'To handle routing'
-      ],
-      correctOption: 'To fetch data at build time'
-    },
-
-    {
-      questionText: 'What is the file-based routing in Next.js?',
-      options: [
-        'Manual route configuration',
-        'Automatic routing based on file structure',
-        'Database-driven routing',
-        'API-based routing'
-
-      ],
-      correctOption: 'Automatic routing based on file structure'
-    },
-
-    {
-      questionText: 'What is the purpose of _app.js in Next.js?',
-      options: [
-        'To initialize database',
-        'To initialize page components and layouts',
-        'To handle API calls',
-        'To manage state'
-
-      ],
-      correctOption: 'To initialize page components and layouts'
-    }
-  ] );
+    questionText: 'What is a React Hook?',
+    options: [
+      'A JavaScript function',
+      'A special function that lets you "hook into" React features',
+      'A type of React component',
+      'A debugging tool'
+    ],
+    correctOption: 'A special function that lets you "hook into" React features'
+  },
+  {
+    questionText: 'Which hook is used for side effects in React?',
+    options: [
+      'useState',
+      'useEffect',
+      'useContext',
+      'useReducer'
+    ],
+    correctOption: 'useEffect'
+  },
+  {
+    questionText: 'What is the Virtual DOM?',
+    options: [
+      'A complete copy of the actual DOM',
+      'A lightweight copy of the actual DOM',
+      'A browser feature',
+      'A JavaScript library'
+    ],
+    correctOption: 'A lightweight copy of the actual DOM'
+  },
+  {
+    questionText: 'What is the purpose of keys in React lists?',
+    options: [
+      'To style list items',
+      'To help React identify which items have changed',
+      'To create unique URLs',
+      'To sort list items'
+    ],
+    correctOption: 'To help React identify which items have changed'
+  },
+  {
+    questionText: 'What is the context API used for?',
+    options: [
+      'State management',
+      'Routing',
+      'API calls',
+      'Form validation'
+    ],
+    correctOption: 'State management'
+  }]);
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch(`https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/quizzes/5`);
+        const response = await fetch(`http://localhost:3000/api/quizzes/4`);
         const data = await response.json();
         if(data.status === 'error') {
-          const quizzes = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/quizzes/init');
+          const quizzes = await fetch('http://localhost:3000/api/quizzes/init');
           const data2 = await quizzes.json();
           const formattedQuestions = data2.questions.map(q => ({
             questionText: q.text, 
@@ -97,67 +87,58 @@ function NextJSQuiz() {
           console.log('Formatted questions:', formattedQuestions);
         }
       } catch (error) {
-        setQuestions( [
+        setQuestions([
           {
-            questionText: 'What is Next.js?',
+            questionText: 'What is a React Hook?', 
             options: [
-              'A CSS framework',
-              'A React framework for production',
-              'A database system',
-              'A testing library'
-      
+              'A JavaScript function',
+              'A special function that lets you "hook into" React features',
+              'A type of React component',
+              'A debugging tool'
             ],
-            correctOption: 'A React framework for production'
+            correctOption: 'A special function that lets you "hook into" React features'
           },
-      
           {
-            questionText: 'What is Server-Side Rendering (SSR)?',
+            questionText: 'Which hook is used for side effects in React?',
             options: [
-              'Client-side data fetching',
-              'Rendering pages on the server before sending to client',
-              'Browser caching',
-              'API routing'
-      
+              'useState',
+              'useEffect',
+              'useContext',
+              'useReducer'
             ],
-            correctOption: 'Rendering pages on the server before sending to client'
+            correctOption: 'useEffect'
           },
-      
-            {
-            questionText: 'What is the purpose of getStaticProps?',
-            options: [
-              'To handle client-side events',
-              'To fetch data at build time',
-      
-              'To manage state',
-              'To handle routing'
-            ],
-            correctOption: 'To fetch data at build time'
-          },
-      
           {
-            questionText: 'What is the file-based routing in Next.js?',
+            questionText: 'What is the Virtual DOM?',
             options: [
-              'Manual route configuration',
-              'Automatic routing based on file structure',
-              'Database-driven routing',
-              'API-based routing'
-      
+              'A complete copy of the actual DOM',
+              'A lightweight copy of the actual DOM',
+              'A browser feature',
+              'A JavaScript library'
             ],
-            correctOption: 'Automatic routing based on file structure'
+            correctOption: 'A lightweight copy of the actual DOM'
           },
-      
           {
-            questionText: 'What is the purpose of _app.js in Next.js?',
+            questionText: 'What is the purpose of keys in React lists?',
             options: [
-              'To initialize database',
-              'To initialize page components and layouts',
-              'To handle API calls',
-              'To manage state'
-      
+              'To style list items',
+              'To help React identify which items have changed',
+              'To create unique URLs',
+              'To sort list items'
             ],
-            correctOption: 'To initialize page components and layouts'
+            correctOption: 'To help React identify which items have changed'
+          },
+          {
+            questionText: 'What is the context API used for?',
+            options: [
+              'State management',
+              'Routing',
+              'API calls',
+              'Form validation'
+            ],
+            correctOption: 'State management'
           }
-        ] );
+        ]);
         console.error('Error fetching questions:', error);
       }
     };
@@ -252,7 +233,7 @@ const handleQuizCompletion = async (finalAnswers) => {
       return;
     }
 
-    const response = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/update-profile', {
+    const response = await fetch('http://localhost:3000/api/update-profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -260,7 +241,7 @@ const handleQuizCompletion = async (finalAnswers) => {
       },
       body: JSON.stringify({
         score: finalScore,
-        quizTitle: 'Next.js',
+        quizTitle: 'React',
         attemptDate: new Date().toISOString()
       })
     });
@@ -311,8 +292,8 @@ const handleQuizCompletion = async (finalAnswers) => {
 
   return (
     <QuizTemplate
-    title="Next.js Quiz"
-    subtitle="Test your Next.js framework knowledge"
+    title="React Quiz"
+    subtitle="Test your React.js knowledge"
     questions={questions || []}
     currentQuestion={currentQuestion}
     timeLeft={timeLeft}
@@ -327,4 +308,4 @@ const handleQuizCompletion = async (finalAnswers) => {
   );
 }
 
-export default NextJSQuiz;
+export default ReactQuiz;

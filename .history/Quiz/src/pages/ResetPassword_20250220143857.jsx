@@ -25,7 +25,7 @@ function ResetPassword() {
 
     setIsLoading(true);
     try {
-      const response = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/reset-password', {
+      const response = await fetch('http://localhost:3000/api/reset-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -3,82 +3,82 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import QuizTemplate from '../../components/QuizTemplate';
 
-function NextJSQuiz() {
+function DataScienceQuiz() {
   const navigate = useNavigate();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showScore, setShowScore] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [timeLeft, setTimeLeft] = useState(30);
-  const [questions, setQuestions] = useState( [
+  const [questions, setQuestions] = useState([
     {
-      questionText: 'What is Next.js?',
+      questionText: 'What is Machine Learning?',
       options: [
-        'A CSS framework',
-        'A React framework for production',
-        'A database system',
-        'A testing library'
+        'A type of computer hardware',
+        'The ability of computers to learn without explicit programming',
+        'A programming language',
+        'A database management system'
 
       ],
-      correctOption: 'A React framework for production'
+      correctOption: 'The ability of computers to learn without explicit programming'
     },
 
     {
-      questionText: 'What is Server-Side Rendering (SSR)?',
+      questionText: 'Which of these is NOT a type of Machine Learning?',
       options: [
-        'Client-side data fetching',
-        'Rendering pages on the server before sending to client',
-        'Browser caching',
-        'API routing'
+        'Supervised Learning',
+        'Unsupervised Learning',
+        'Database Learning',
+        'Reinforcement Learning'
 
       ],
-      correctOption: 'Rendering pages on the server before sending to client'
-    },
-
-      {
-      questionText: 'What is the purpose of getStaticProps?',
-      options: [
-        'To handle client-side events',
-        'To fetch data at build time',
-
-        'To manage state',
-        'To handle routing'
-      ],
-      correctOption: 'To fetch data at build time'
+      correctOption: 'Database Learning'
     },
 
     {
-      questionText: 'What is the file-based routing in Next.js?',
+      questionText: 'What is the purpose of data preprocessing?',
       options: [
-        'Manual route configuration',
-        'Automatic routing based on file structure',
-        'Database-driven routing',
-        'API-based routing'
+        'To make data look better',
+        'To clean and prepare data for analysis',
+        'To delete all data',
+        'To encrypt data'
 
       ],
-      correctOption: 'Automatic routing based on file structure'
+      correctOption: 'To clean and prepare data for analysis'
     },
 
     {
-      questionText: 'What is the purpose of _app.js in Next.js?',
+      questionText: 'What is a Neural Network?',
       options: [
-        'To initialize database',
-        'To initialize page components and layouts',
-        'To handle API calls',
-        'To manage state'
+        'A computer network',
+        'A biological network',
+        'A computational model inspired by the human brain',
+        'A social network'
 
       ],
-      correctOption: 'To initialize page components and layouts'
+      correctOption: 'A computational model inspired by the human brain'
+    },
+
+    {
+      questionText: 'Which library is commonly used for Machine Learning in Python?',
+      options: [
+        'React',
+        'scikit-learn',
+        'jQuery',
+        'Express'
+
+      ],
+      correctOption: 'scikit-learn'
     }
   ] );
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch(`https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/quizzes/5`);
+        const response = await fetch(`http://localhost:3000/api/quizzes/8`);
         const data = await response.json();
         if(data.status === 'error') {
-          const quizzes = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/quizzes/init');
+          const quizzes = await fetch('http://localhost:3000/api/quizzes/init');
           const data2 = await quizzes.json();
           const formattedQuestions = data2.questions.map(q => ({
             questionText: q.text, 
@@ -97,67 +97,67 @@ function NextJSQuiz() {
           console.log('Formatted questions:', formattedQuestions);
         }
       } catch (error) {
-        setQuestions( [
+        setQuestions([
           {
-            questionText: 'What is Next.js?',
+            questionText: 'What is Machine Learning?',
             options: [
-              'A CSS framework',
-              'A React framework for production',
-              'A database system',
-              'A testing library'
+              'A type of computer hardware',
+              'The ability of computers to learn without explicit programming',
+              'A programming language',
+              'A database management system'
       
             ],
-            correctOption: 'A React framework for production'
+            correctOption: 'The ability of computers to learn without explicit programming'
           },
       
           {
-            questionText: 'What is Server-Side Rendering (SSR)?',
+            questionText: 'Which of these is NOT a type of Machine Learning?',
             options: [
-              'Client-side data fetching',
-              'Rendering pages on the server before sending to client',
-              'Browser caching',
-              'API routing'
+              'Supervised Learning',
+              'Unsupervised Learning',
+              'Database Learning',
+              'Reinforcement Learning'
       
             ],
-            correctOption: 'Rendering pages on the server before sending to client'
-          },
-      
-            {
-            questionText: 'What is the purpose of getStaticProps?',
-            options: [
-              'To handle client-side events',
-              'To fetch data at build time',
-      
-              'To manage state',
-              'To handle routing'
-            ],
-            correctOption: 'To fetch data at build time'
+            correctOption: 'Database Learning'
           },
       
           {
-            questionText: 'What is the file-based routing in Next.js?',
+            questionText: 'What is the purpose of data preprocessing?',
             options: [
-              'Manual route configuration',
-              'Automatic routing based on file structure',
-              'Database-driven routing',
-              'API-based routing'
+              'To make data look better',
+              'To clean and prepare data for analysis',
+              'To delete all data',
+              'To encrypt data'
       
             ],
-            correctOption: 'Automatic routing based on file structure'
+            correctOption: 'To clean and prepare data for analysis'
           },
       
           {
-            questionText: 'What is the purpose of _app.js in Next.js?',
+            questionText: 'What is a Neural Network?',
             options: [
-              'To initialize database',
-              'To initialize page components and layouts',
-              'To handle API calls',
-              'To manage state'
+              'A computer network',
+              'A biological network',
+              'A computational model inspired by the human brain',
+              'A social network'
       
             ],
-            correctOption: 'To initialize page components and layouts'
+            correctOption: 'A computational model inspired by the human brain'
+          },
+      
+          {
+            questionText: 'Which library is commonly used for Machine Learning in Python?',
+            options: [
+              'React',
+              'scikit-learn',
+              'jQuery',
+              'Express'
+      
+            ],
+            correctOption: 'scikit-learn'
           }
-        ] );
+        ]);
         console.error('Error fetching questions:', error);
       }
     };
@@ -252,7 +252,7 @@ const handleQuizCompletion = async (finalAnswers) => {
       return;
     }
 
-    const response = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/update-profile', {
+    const response = await fetch('http://localhost:3000/api/update-profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -260,7 +260,7 @@ const handleQuizCompletion = async (finalAnswers) => {
       },
       body: JSON.stringify({
         score: finalScore,
-        quizTitle: 'Next.js',
+        quizTitle: 'Data Science',
         attemptDate: new Date().toISOString()
       })
     });
@@ -311,8 +311,8 @@ const handleQuizCompletion = async (finalAnswers) => {
 
   return (
     <QuizTemplate
-    title="Next.js Quiz"
-    subtitle="Test your Next.js framework knowledge"
+    title="Data Science Quiz"
+    subtitle="Master statistics, machine learning, and data analysis concepts"
     questions={questions || []}
     currentQuestion={currentQuestion}
     timeLeft={timeLeft}
@@ -327,4 +327,4 @@ const handleQuizCompletion = async (finalAnswers) => {
   );
 }
 
-export default NextJSQuiz;
+export default DataScienceQuiz;

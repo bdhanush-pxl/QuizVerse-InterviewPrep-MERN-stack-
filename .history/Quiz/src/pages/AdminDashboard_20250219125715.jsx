@@ -32,7 +32,7 @@ function AdminDashboard() {
 
   const fetchQuizzes = async () => {
     try {
-      const response = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/quizzes');
+      const response = await fetch('http://localhost:3000/api/quizzes');
       const data = await response.json();
       if (data.status === 'ok') {
         setQuizzes(data.quizzes);
@@ -60,7 +60,7 @@ function AdminDashboard() {
       }
 
       const token = localStorage.getItem('token');
-      const response = await fetch(`https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/quizzes/${selectedQuiz._id}`, {
+      const response = await fetch(`http://localhost:3000/api/quizzes/${selectedQuiz._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ function AdminDashboard() {
   const handleAddNewQuiz = async () => {
     try {
       // First check if quiz with this ID exists
-      const response = await fetch(`https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/quizzes/${newQuiz.id}`, {
+      const response = await fetch(`http://localhost:3000/api/quizzes/${newQuiz.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

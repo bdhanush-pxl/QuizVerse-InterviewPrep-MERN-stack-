@@ -390,7 +390,7 @@ const FeedbackForm = () => {
       const token = localStorage.getItem('token');
       const userId = localStorage.getItem('userId');
       
-      const response = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/submit-feedback', {
+      const response = await fetch('http://localhost:3000/api/submit-feedback', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -675,7 +675,7 @@ function UserProfile() {
     const fetchInitialUserData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/user-profile', {
+        const response = await fetch('http://localhost:3000/api/user-profile', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -719,7 +719,7 @@ function UserProfile() {
     const fetchUserProfile = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/user-profile', {
+        const response = await fetch('http://localhost:3000/api/user-profile', {
           headers: {
             'Authorization': `Bearer ${token}`
           }

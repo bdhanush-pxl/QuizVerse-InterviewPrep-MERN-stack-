@@ -3,82 +3,82 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import QuizTemplate from '../../components/QuizTemplate';
 
-function NextJSQuiz() {
+function FrontendQuiz() {
   const navigate = useNavigate();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showScore, setShowScore] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [timeLeft, setTimeLeft] = useState(30);
-  const [questions, setQuestions] = useState( [
+  const [questions, setQuestions] = useState([
     {
-      questionText: 'What is Next.js?',
+      questionText: 'What is the purpose of CSS Grid?',
       options: [
-        'A CSS framework',
-        'A React framework for production',
-        'A database system',
-        'A testing library'
+        'To add animations',
+        'To create two-dimensional layouts',
+        'To handle form submissions',
+        'To manage state in applications'
 
       ],
-      correctOption: 'A React framework for production'
+      correctOption: 'To create two-dimensional layouts'
     },
 
     {
-      questionText: 'What is Server-Side Rendering (SSR)?',
+      questionText: 'Which of these is NOT a valid CSS selector?',
       options: [
-        'Client-side data fetching',
-        'Rendering pages on the server before sending to client',
-        'Browser caching',
-        'API routing'
+        '.class-name',
+        '#id-name',
+        '@element-name',
+        '[attribute=value]'
 
       ],
-      correctOption: 'Rendering pages on the server before sending to client'
+      correctOption: '@element-name'
+    },
+
+    {
+      questionText: 'What is the purpose of semantic HTML?',
+      options: [
+        'To make the code look better',
+        'To provide meaning and structure to web content',
+        'To improve website speed',
+        'To add styling to elements'
+
+      ],
+      correctOption: 'To provide meaning and structure to web content'
     },
 
       {
-      questionText: 'What is the purpose of getStaticProps?',
+      questionText: 'What is the box model in CSS?',
       options: [
-        'To handle client-side events',
-        'To fetch data at build time',
+        'A JavaScript framework',
+        'A layout model that defines how elements are structured',
+        'A type of database',
+        'A design pattern'
 
-        'To manage state',
-        'To handle routing'
       ],
-      correctOption: 'To fetch data at build time'
+      correctOption: 'A layout model that defines how elements are structured'
     },
 
     {
-      questionText: 'What is the file-based routing in Next.js?',
+      questionText: 'Which unit is relative to the viewport width?',
       options: [
-        'Manual route configuration',
-        'Automatic routing based on file structure',
-        'Database-driven routing',
-        'API-based routing'
+        'px',
+        'vw',
+        'em',
+        'rem'
 
       ],
-      correctOption: 'Automatic routing based on file structure'
-    },
-
-    {
-      questionText: 'What is the purpose of _app.js in Next.js?',
-      options: [
-        'To initialize database',
-        'To initialize page components and layouts',
-        'To handle API calls',
-        'To manage state'
-
-      ],
-      correctOption: 'To initialize page components and layouts'
+      correctOption: 'vw'
     }
-  ] );
+  ]);
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch(`https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/quizzes/5`);
+        const response = await fetch(`http://localhost:3000/api/quizzes/6`);
         const data = await response.json();
         if(data.status === 'error') {
-          const quizzes = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/quizzes/init');
+          const quizzes = await fetch('http://localhost:3000/api/quizzes/init');
           const data2 = await quizzes.json();
           const formattedQuestions = data2.questions.map(q => ({
             questionText: q.text, 
@@ -97,67 +97,67 @@ function NextJSQuiz() {
           console.log('Formatted questions:', formattedQuestions);
         }
       } catch (error) {
-        setQuestions( [
+        setQuestions([
           {
-            questionText: 'What is Next.js?',
+            questionText: 'What is the purpose of CSS Grid?',
             options: [
-              'A CSS framework',
-              'A React framework for production',
-              'A database system',
-              'A testing library'
+              'To add animations',
+              'To create two-dimensional layouts',
+              'To handle form submissions',
+              'To manage state in applications'
       
             ],
-            correctOption: 'A React framework for production'
+            correctOption: 'To create two-dimensional layouts'
           },
       
           {
-            questionText: 'What is Server-Side Rendering (SSR)?',
+            questionText: 'Which of these is NOT a valid CSS selector?',
             options: [
-              'Client-side data fetching',
-              'Rendering pages on the server before sending to client',
-              'Browser caching',
-              'API routing'
+              '.class-name',
+              '#id-name',
+              '@element-name',
+              '[attribute=value]'
       
             ],
-            correctOption: 'Rendering pages on the server before sending to client'
+            correctOption: '@element-name'
+          },
+      
+          {
+            questionText: 'What is the purpose of semantic HTML?',
+            options: [
+              'To make the code look better',
+              'To provide meaning and structure to web content',
+              'To improve website speed',
+              'To add styling to elements'
+      
+            ],
+            correctOption: 'To provide meaning and structure to web content'
           },
       
             {
-            questionText: 'What is the purpose of getStaticProps?',
+            questionText: 'What is the box model in CSS?',
             options: [
-              'To handle client-side events',
-              'To fetch data at build time',
+              'A JavaScript framework',
+              'A layout model that defines how elements are structured',
+              'A type of database',
+              'A design pattern'
       
-              'To manage state',
-              'To handle routing'
             ],
-            correctOption: 'To fetch data at build time'
+            correctOption: 'A layout model that defines how elements are structured'
           },
       
           {
-            questionText: 'What is the file-based routing in Next.js?',
+            questionText: 'Which unit is relative to the viewport width?',
             options: [
-              'Manual route configuration',
-              'Automatic routing based on file structure',
-              'Database-driven routing',
-              'API-based routing'
+              'px',
+              'vw',
+              'em',
+              'rem'
       
             ],
-            correctOption: 'Automatic routing based on file structure'
-          },
-      
-          {
-            questionText: 'What is the purpose of _app.js in Next.js?',
-            options: [
-              'To initialize database',
-              'To initialize page components and layouts',
-              'To handle API calls',
-              'To manage state'
-      
-            ],
-            correctOption: 'To initialize page components and layouts'
+            correctOption: 'vw'
           }
-        ] );
+        ]);
         console.error('Error fetching questions:', error);
       }
     };
@@ -252,7 +252,7 @@ const handleQuizCompletion = async (finalAnswers) => {
       return;
     }
 
-    const response = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/update-profile', {
+    const response = await fetch('http://localhost:3000/api/update-profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -260,7 +260,7 @@ const handleQuizCompletion = async (finalAnswers) => {
       },
       body: JSON.stringify({
         score: finalScore,
-        quizTitle: 'Next.js',
+        quizTitle: 'Frontend Development',
         attemptDate: new Date().toISOString()
       })
     });
@@ -311,8 +311,8 @@ const handleQuizCompletion = async (finalAnswers) => {
 
   return (
     <QuizTemplate
-    title="Next.js Quiz"
-    subtitle="Test your Next.js framework knowledge"
+    title="Frontend Development Quiz"
+    subtitle="Test your frontend development skills "
     questions={questions || []}
     currentQuestion={currentQuestion}
     timeLeft={timeLeft}
@@ -327,4 +327,4 @@ const handleQuizCompletion = async (finalAnswers) => {
   );
 }
 
-export default NextJSQuiz;
+export default FrontendQuiz;

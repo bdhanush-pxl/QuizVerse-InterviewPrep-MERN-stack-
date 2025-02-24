@@ -14,7 +14,7 @@ function Discussion({ userName }) {
 
   const fetchComments = async () => {
     try {
-      const response = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/comments');
+      const response = await fetch('http://localhost:3000/api/comments');
       const data = await response.json();
       
       if (data.status === 'ok') {
@@ -40,7 +40,7 @@ function Discussion({ userName }) {
 
     setIsSubmitting(true);
     try {
-      const response = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/add-comment', {
+      const response = await fetch('http://localhost:3000/api/add-comment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -73,7 +73,7 @@ function Discussion({ userName }) {
 
   const handleConfirmDelete = async () => {
     try {
-      const response = await fetch(`https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/comments/${deleteConfirmation.commentId}?userName=${encodeURIComponent(userName)}`, {
+      const response = await fetch(`http://localhost:3000/api/comments/${deleteConfirmation.commentId}?userName=${encodeURIComponent(userName)}`, {
         method: 'DELETE',
       });
 

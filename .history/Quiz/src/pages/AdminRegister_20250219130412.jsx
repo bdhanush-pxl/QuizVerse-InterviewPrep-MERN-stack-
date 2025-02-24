@@ -19,7 +19,7 @@ function AdminRegister() {
     setError('');
 
     try {
-      const response = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/register-admin', {
+      const response = await fetch('http://localhost:3000/api/register-admin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

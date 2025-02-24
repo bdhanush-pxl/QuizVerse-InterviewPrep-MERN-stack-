@@ -3,82 +3,77 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import QuizTemplate from '../../components/QuizTemplate';
 
-function NextJSQuiz() {
+function OSQuiz() {
   const navigate = useNavigate();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showScore, setShowScore] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [timeLeft, setTimeLeft] = useState(30);
-  const [questions, setQuestions] = useState( [
+  const [questions, setQuestions] = useState([
     {
-      questionText: 'What is Next.js?',
+      questionText: "What is an operating system?",
       options: [
-        'A CSS framework',
-        'A React framework for production',
-        'A database system',
-        'A testing library'
-
+        "A system software that manages hardware and software resources",
+        "An application software for editing documents",
+        "A programming language",
+        "A hardware component"
       ],
-      correctOption: 'A React framework for production'
+      correctOption: 'A system software that manages hardware and software resources'
     },
 
     {
-      questionText: 'What is Server-Side Rendering (SSR)?',
+      questionText: "Which of the following is not a function of an operating system?",
       options: [
-        'Client-side data fetching',
-        'Rendering pages on the server before sending to client',
-        'Browser caching',
-        'API routing'
-
+        "Memory management",
+        "Process management",
+        "Web browsing",
+        "File management"
       ],
-      correctOption: 'Rendering pages on the server before sending to client'
+      correctOption: "Web browsing"
     },
-
-      {
-      questionText: 'What is the purpose of getStaticProps?',
+    {
+      questionText: "What is a process in operating systems?",
       options: [
-        'To handle client-side events',
-        'To fetch data at build time',
-
-        'To manage state',
-        'To handle routing'
+        "A program in execution",
+        "A file stored in memory",
+        "A system hardware",
+        "A type of memory"
       ],
-      correctOption: 'To fetch data at build time'
+      correctOption: "A program in execution"
     },
 
     {
-      questionText: 'What is the file-based routing in Next.js?',
+      questionText: "What is deadlock in operating systems?",
       options: [
-        'Manual route configuration',
-        'Automatic routing based on file structure',
-        'Database-driven routing',
-        'API-based routing'
-
+        "When a process is terminated",
+        "When two or more processes wait indefinitely for each other",
+        "When a process is executing",
+        "When a process gets infinite CPU time"
       ],
-      correctOption: 'Automatic routing based on file structure'
+      correctOption: "When two or more processes wait indefinitely for each other"
     },
 
     {
-      questionText: 'What is the purpose of _app.js in Next.js?',
+      questionText: "What is virtual memory in operating systems?",
       options: [
-        'To initialize database',
-        'To initialize page components and layouts',
-        'To handle API calls',
-        'To manage state'
-
+        "Physical RAM installed in computer",
+        "A technique that provides more memory than physically available",
+        "Cache memory",
+        "ROM memory"
       ],
-      correctOption: 'To initialize page components and layouts'
+      correctOption: "A technique that provides more memory than physically available"
     }
-  ] );
+  ]
+);
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch(`https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/quizzes/5`);
+        const response = await fetch(`http://localhost:3000/api/quizzes/1`);
         const data = await response.json();
         if(data.status === 'error') {
-          const quizzes = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/quizzes/init');
+          const quizzes = await fetch('http://localhost:3000/api/quizzes/init');
           const data2 = await quizzes.json();
           const formattedQuestions = data2.questions.map(q => ({
             questionText: q.text, 
@@ -97,67 +92,61 @@ function NextJSQuiz() {
           console.log('Formatted questions:', formattedQuestions);
         }
       } catch (error) {
-        setQuestions( [
+        setQuestions([
           {
-            questionText: 'What is Next.js?',
+            questionText: "What is an operating system?",
             options: [
-              'A CSS framework',
-              'A React framework for production',
-              'A database system',
-              'A testing library'
-      
+              "A system software that manages hardware and software resources",
+              "An application software for editing documents",
+              "A programming language",
+              "A hardware component"
             ],
-            correctOption: 'A React framework for production'
+            correctOption: 'A system software that manages hardware and software resources'
           },
       
           {
-            questionText: 'What is Server-Side Rendering (SSR)?',
+            questionText: "Which of the following is not a function of an operating system?",
             options: [
-              'Client-side data fetching',
-              'Rendering pages on the server before sending to client',
-              'Browser caching',
-              'API routing'
-      
+              "Memory management",
+              "Process management",
+              "Web browsing",
+              "File management"
             ],
-            correctOption: 'Rendering pages on the server before sending to client'
+            correctOption: "Web browsing"
           },
-      
-            {
-            questionText: 'What is the purpose of getStaticProps?',
+          {
+            questionText: "What is a process in operating systems?",
             options: [
-              'To handle client-side events',
-              'To fetch data at build time',
-      
-              'To manage state',
-              'To handle routing'
+              "A program in execution",
+              "A file stored in memory",
+              "A system hardware",
+              "A type of memory"
             ],
-            correctOption: 'To fetch data at build time'
+            correctOption: "A program in execution"
           },
       
           {
-            questionText: 'What is the file-based routing in Next.js?',
+            questionText: "What is deadlock in operating systems?",
             options: [
-              'Manual route configuration',
-              'Automatic routing based on file structure',
-              'Database-driven routing',
-              'API-based routing'
-      
+              "When a process is terminated",
+              "When two or more processes wait indefinitely for each other",
+              "When a process is executing",
+              "When a process gets infinite CPU time"
             ],
-            correctOption: 'Automatic routing based on file structure'
+            correctOption: "When two or more processes wait indefinitely for each other"
           },
       
           {
-            questionText: 'What is the purpose of _app.js in Next.js?',
+            questionText: "What is virtual memory in operating systems?",
             options: [
-              'To initialize database',
-              'To initialize page components and layouts',
-              'To handle API calls',
-              'To manage state'
-      
+              "Physical RAM installed in computer",
+              "A technique that provides more memory than physically available",
+              "Cache memory",
+              "ROM memory"
             ],
-            correctOption: 'To initialize page components and layouts'
+            correctOption: "A technique that provides more memory than physically available"
           }
-        ] );
+        ]);
         console.error('Error fetching questions:', error);
       }
     };
@@ -252,7 +241,7 @@ const handleQuizCompletion = async (finalAnswers) => {
       return;
     }
 
-    const response = await fetch('https://quiz-verse-interview-prep-mern-stack-fd2x.vercel.app/api/update-profile', {
+    const response = await fetch('http://localhost:3000/api/update-profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -260,7 +249,7 @@ const handleQuizCompletion = async (finalAnswers) => {
       },
       body: JSON.stringify({
         score: finalScore,
-        quizTitle: 'Next.js',
+        quizTitle: 'Operating Systems',
         attemptDate: new Date().toISOString()
       })
     });
@@ -311,8 +300,8 @@ const handleQuizCompletion = async (finalAnswers) => {
 
   return (
     <QuizTemplate
-    title="Next.js Quiz"
-    subtitle="Test your Next.js framework knowledge"
+    title="Operating System Quiz"
+    subtitle="Test your Operating System knowledge"
     questions={questions || []}
     currentQuestion={currentQuestion}
     timeLeft={timeLeft}
@@ -327,4 +316,4 @@ const handleQuizCompletion = async (finalAnswers) => {
   );
 }
 
-export default NextJSQuiz;
+export default OSQuiz;
