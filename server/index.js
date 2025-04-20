@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -11,11 +12,12 @@ const Quiz = require('./models/Quiz');
 const crypto = require('crypto');
 const { toast } = require('react-toastify');
 const {sendResetEmail} = require('./config/email');    
+const JWT_SECRET = process.env.JWT_SECRET;
 
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/quiz');
+mongoose.connect(process.env.MONGODB_URI);
 
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
@@ -26,7 +28,7 @@ const authenticateToken = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, 'secret123');
+    const decoded = jwt.verify(token, JWT_SECRET);
     req.user = decoded;
     next();
   } catch (error) {
@@ -76,7 +78,7 @@ app.post('/api/login', async (req, res) => {
                 name: user.name,
                 email: user.email,
                 isAdmin: user.isAdmin
-            }, 'secret123');
+            }, JWT_SECRET);
 
             res.json({ 
                 status: 'ok',
@@ -198,7 +200,7 @@ app.post('/api/register-admin', async (req, res) => {
 app.post('/api/save-quiz', async (req, res) => {
   try {
     const token = req.headers.authorization.split(' ')[1];
-    const decoded = jwt.verify(token, 'secret123');
+    const decoded = jwt.verify(token, JWT_SECRET);
     
     const user = await User.findOne({ email: decoded.email });
     if (!user) {
@@ -230,7 +232,7 @@ app.post('/api/save-quiz', async (req, res) => {
 app.post('/api/update-attempt-status', async (req, res) => {
   try {
     const token = req.headers.authorization.split(' ')[1];
-    const decoded = jwt.verify(token, 'secret123');
+    const decoded = jwt.verify(token, JWT_SECRET);
     
     const user = await User.findOne({ email: decoded.email });
     if (!user) {
@@ -272,7 +274,7 @@ app.post('/api/update-attempt-status', async (req, res) => {
 app.post('/api/update-profile', async (req, res) => {
   try {
     const token = req.headers.authorization.split(' ')[1];
-    const decoded = jwt.verify(token, 'secret123');
+    const decoded = jwt.verify(token, JWT_SECRET);
     
     const user = await User.findOne({ email: decoded.email });
     if (!user) {
@@ -388,7 +390,7 @@ app.post('/api/update-profile', async (req, res) => {
 app.get('/api/user-profile', async (req, res) => {
   try {
     const token = req.headers.authorization.split(' ')[1];
-    const decoded = jwt.verify(token, 'secret123');
+    const decoded = jwt.verify(token, JWT_SECRET);
     
     const user = await User.findOne({ email: decoded.email });
     if (!user) {
@@ -521,21 +523,41 @@ app.get('/api/stats', async (req, res) => {
   }
 });
 
-app.get('/api/quizzes/:id', async(req,res) => {
+app.get('/api/quizzes/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const quizzes = await Quiz.findOne({ id: parseInt(id) });
-    if (!quizzes) {
-      return res.status(404).json({status: 'error', message: 'Quiz not found'});
+    
+    // Validate if id is a valid number
+    const quizId = Number(id);
+    if (isNaN(quizId)) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Invalid quiz ID format'
+      });
     }
-    const questions = quizzes.questions;
-    res.json({status: 'ok', questions});
-    console.log(questions);
+
+    const quiz = await Quiz.findOne({ id: quizId });
+    
+    if (!quiz) {
+      return res.status(404).json({
+        status: 'error', 
+        message: 'Quiz not found'
+      });
+    }
+
+    res.json({
+      status: 'ok',
+      questions: quiz.questions
+    });
+
   } catch (error) {
-    console.error('Error fetching quizzes:', error);
-    res.status(500).json({status: 'error', message: 'Failed to fetch quizzes'});
+    console.error('Error fetching quiz:', error);
+    res.status(500).json({
+      status: 'error',
+      message: 'Failed to fetch quiz'
+    });
   }
-})
+});
 
 app.get('/api/quizzes', async (req, res) => {
   try {
@@ -1165,6 +1187,7 @@ app.delete('/api/comments/:id', async (req, res) => {
     res.json({ status: 'error', message: 'Failed to delete comment' });
   }
 });
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
