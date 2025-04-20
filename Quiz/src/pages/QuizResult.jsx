@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate } from 'react-router-dom';
-const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
 
 function QuizResult({ score, quizTitle }) {
   const [loading, setLoading] = useState(true);
@@ -14,7 +13,7 @@ function QuizResult({ score, quizTitle }) {
   useEffect(() => {
     const updateProfile = async () => {
       try {
-        const response = await fetch(`${API_URL}/api/update-profile`, {
+        const response = await fetch('http://localhost:3000/api/update-profile', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

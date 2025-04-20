@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
-const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
 
 function ResetPassword() {
   const [email, setEmail] = useState('');
@@ -26,7 +25,7 @@ function ResetPassword() {
 
     setIsLoading(true);
     try {
-      const response = await fetch(`${API_URL}/api/reset-password`, {
+      const response = await fetch('http://localhost:3000/api/reset-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

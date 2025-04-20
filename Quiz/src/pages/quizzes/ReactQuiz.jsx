@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import QuizTemplate from '../../components/QuizTemplate';
-const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
 
 function ReactQuiz() {
   const navigate = useNavigate();
@@ -66,10 +65,10 @@ function ReactQuiz() {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch(`${API_URL}/api/quizzes/4`);
+        const response = await fetch(`http://localhost:3000/api/quizzes/4`);
         const data = await response.json();
         if(data.status === 'error') {
-          const quizzes = await fetch(`${API_URL}/api/quizzes/init`);
+          const quizzes = await fetch('http://localhost:3000/api/quizzes/init');
           const data2 = await quizzes.json();
           const formattedQuestions = data2.questions.map(q => ({
             questionText: q.text, 
@@ -234,7 +233,7 @@ const handleQuizCompletion = async (finalAnswers) => {
       return;
     }
 
-    const response = await fetch(`${API_URL}/api/update-profile`, {
+    const response = await fetch('http://localhost:3000/api/update-profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

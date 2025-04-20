@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { toast } from 'react-hot-toast';
 import BlurText from '../components/BlurText';
-const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
 
 function AdminRegister() {
   const [name, setName] = useState('');
@@ -20,7 +19,7 @@ function AdminRegister() {
     setError('');
 
     try {
-      const response = await fetch(`${API_URL}/api/register-admin`, {
+      const response = await fetch('http://localhost:3000/api/register-admin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
