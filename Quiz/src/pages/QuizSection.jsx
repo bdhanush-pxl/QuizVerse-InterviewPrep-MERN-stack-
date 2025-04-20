@@ -6,6 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import Discussion from './Discussion/Discussion';
+const API_URL = process.env.REACT_APP_API_URL;
 
 const calculateStreak = (attempts) => {
   if (!attempts || attempts.length === 0) return 0;
@@ -204,7 +205,7 @@ function QuizSection() {
         const savedQuizzesFromStorage = JSON.parse(localStorage.getItem('savedQuizzes') || '[]');
         setSavedQuizzes(savedQuizzesFromStorage);
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:3000/api/user-profile', {
+        const response = await fetch(`${API_URL}/api/user-profile`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -266,7 +267,7 @@ function QuizSection() {
 
   const handleQuizStart = async (quiz, route) => {
     try {
-      const response = await fetch('http://localhost:3000/api/update-attempt-status', {
+      const response = await fetch(`${API_URL}/api/update-attempt-status`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -332,7 +333,7 @@ function QuizSection() {
   const toggleSaveQuiz = async (quizId, quizTitle) => {
     try {
       const isCurrentlySaved = savedQuizzes.some(sq => sq.quizId === Number(quizId));
-      const response = await fetch('http://localhost:3000/api/save-quiz', {
+      const response = await fetch(`${API_URL}/api/save-quiz`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

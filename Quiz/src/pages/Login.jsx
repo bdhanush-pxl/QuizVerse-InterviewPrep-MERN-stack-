@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion'; 
+import { motion, AnimatePresence } from 'framer-motion';
+const API_URL = process.env.REACT_APP_API_URL;
 
 const isValidEmail = (email) => {
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -32,7 +33,7 @@ const ResetPasswordModal = ({ isOpen, onClose, onSubmit }) => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/reset-password', {
+      const response = await fetch(`${API_URL}/api/reset-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -169,7 +170,7 @@ function Login() {
         }
 
         try {
-            const response = await fetch('http://localhost:3000/api/login', {
+            const response = await fetch(`${API_URL}/api/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

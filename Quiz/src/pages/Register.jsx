@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import BlurText from '../components/BlurText';
+const API_URL = process.env.REACT_APP_API_URL;
+
 
 const isValidEmail = (email) => {
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -26,7 +28,7 @@ function Register() {
 
   const fetchStats = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/stats');
+      const response = await fetch(`${API_URL}/api/stats`);
       const data = await response.json();
       if (data.status === 'ok') {
         setStats({
@@ -49,7 +51,7 @@ function Register() {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/register', { 
+      const response = await fetch(`${API_URL}/api/register`, { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

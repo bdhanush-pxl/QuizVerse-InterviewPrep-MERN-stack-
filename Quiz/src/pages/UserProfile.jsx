@@ -5,6 +5,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer} from 'recharts';
 import { useNavigate } from 'react-router-dom';
+const API_URL = process.env.REACT_APP_API_URL;
 const toastStyles = {
   success: {
     style: {
@@ -377,7 +378,7 @@ const FeedbackForm = () => {
       const token = localStorage.getItem('token');
       const userId = localStorage.getItem('userId');
       
-      const response = await fetch('http://localhost:3000/api/submit-feedback', {
+      const response = await fetch(`${API_URL}/api/submit-feedback`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -659,7 +660,7 @@ function UserProfile() {
     const fetchInitialUserData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:3000/api/user-profile', {
+        const response = await fetch(`${API_URL}/api/user-profile`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -702,7 +703,7 @@ function UserProfile() {
     const fetchUserProfile = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:3000/api/user-profile', {
+        const response = await fetch(`${API_URL}/api/user-profile`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }

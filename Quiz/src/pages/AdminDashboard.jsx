@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { toast } from 'react-hot-toast';
 import BlurText from "../components/BlurText";
+const API_URL = process.env.REACT_APP_API_URL;
 
 function AdminDashboard() {
   const [userName, setUserName] = useState('');
@@ -32,7 +33,7 @@ function AdminDashboard() {
 
   const fetchQuizzes = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/quizzes');
+      const response = await fetch(`${API_URL}/api/quizzes`);
       const data = await response.json();
       if (data.status === 'ok') {
         setQuizzes(data.quizzes);
@@ -60,7 +61,7 @@ function AdminDashboard() {
       }
 
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:3000/api/quizzes/${selectedQuiz._id}`, {
+      const response = await fetch(`${API_URL}/api/quizzes/${selectedQuiz._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
